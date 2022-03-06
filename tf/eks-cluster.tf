@@ -36,3 +36,12 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
+
+terraform {
+  backend "s3" {
+    bucket         = "jm-tf-state"
+    key            = "ekscluster/terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "jm-tf-locks-table-eks"
+  }
+}
