@@ -9,6 +9,8 @@ pipeline {
   options {
     disableConcurrentBuilds()
     timeout(time: 1, unit: 'HOURS')
+    withAWS(credentials: params.credential)
+
   }
 
   agent any
