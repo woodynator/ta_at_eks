@@ -76,7 +76,7 @@ pipeline {
                 script {
                     // def tfHome = tool name: 'terraform'
                     // env.PATH = "${tfHome}:${env.PATH}"
-                    input "Destroy Terraform stack ${params.dynamo} in aws?" 
+                    input "Destroy Terraform stack ${params.cluster} in aws?" 
 
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
                     credentialsId: params.credential, 
