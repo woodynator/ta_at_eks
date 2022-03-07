@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // def tfHome = tool name: 'terraform'
                     // env.PATH = "${tfHome}:${env.PATH}"
-                    input "Create/update Terraform stack ${params.cluster} in aws?" 
+                    input "Create or Update EKS cluster ${params.cluster} in AWS?" 
 
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
                     credentialsId: params.credential, 
@@ -76,7 +76,7 @@ pipeline {
                 script {
                     // def tfHome = tool name: 'terraform'
                     // env.PATH = "${tfHome}:${env.PATH}"
-                    input "Destroy Terraform stack ${params.cluster} in aws?" 
+                    input "Destroy EKS cluster ${params.cluster} in AWS?" 
 
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
                     credentialsId: params.credential, 
