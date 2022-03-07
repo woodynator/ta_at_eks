@@ -9,7 +9,7 @@ pipeline {
   options {
     disableConcurrentBuilds()
     timeout(time: 1, unit: 'HOURS')
-    withAWS(credentials: params.credential)
+    withAWS(credentials: params.credential,)
 
   }
 
@@ -17,6 +17,7 @@ pipeline {
 
   environment {
     PATH = "${env.WORKSPACE}/bin:${env.PATH}"
+    KUBECONFIG = "${env.WORKSPACE}/.kube/config"
   }
 
   tools {
