@@ -16,6 +16,8 @@ pipeline {
   agent any
 
   environment {
+    currentBuild.displayName = "#" + env.BUILD_NUMBER + " " + params.action + " " + params.cluster
+    plan = params.cluster + '.plan'    
     PATH = "${env.WORKSPACE}/bin:${env.PATH}"
     KUBECONFIG = "${env.WORKSPACE}/.kube/config"
   }
