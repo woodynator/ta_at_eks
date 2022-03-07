@@ -30,7 +30,7 @@ pipeline {
       steps {
         script {
         //   currentBuild.displayName = "#" + env.BUILD_NUMBER + " " + params.action + " " + params.cluster
-          plan = params.dynamo + '.plan'
+          plan = params.cluster + '.plan'
 
            println "Downloading the kubectl and helm binaries..."
           //  (major, minor) = params.k8s_version.split(/\./)
