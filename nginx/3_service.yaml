@@ -3,7 +3,7 @@ apiVersion: v1
 metadata: 
   name: nginx
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
