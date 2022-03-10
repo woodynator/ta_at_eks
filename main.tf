@@ -11,18 +11,20 @@ module "eks" {
     root_volume_type = "gp2"
   }
 
+# This block specifies the worker groups. 
+# The instance types of each group are different just 
+# in case the workloads require more resources
+
   worker_groups = [
     {
       name                          = "worker-group-1"
       instance_type                 = "t2.small"
-      additional_userdata           = "echo foo bar"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
       asg_desired_capacity          = 2
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.small"
-      additional_userdata           = "echo foo bar"
+      instance_type                 = "t2.medium"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 1
     },
@@ -36,6 +38,11 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
+
+# This block establishes the backend to be remote 
+# It'll use and S3 bucket to store the state
+# It'll use a Dynamo DB table to the lock file
+# For this specific case they must be created in advance
 
 terraform {
   backend "s3" {
