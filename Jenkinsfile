@@ -28,7 +28,7 @@ pipeline {
         stage('Setup') {
           steps {
             script {
-            //   currentBuild.displayName = "#" + env.BUILD_NUMBER + " " + params.action + " " + params.cluster
+            // The next line will create a plan file with the cluster name specified in the parameters
                 plan = params.cluster + '.plan'
 
                 println "Downloading the kubectl and helm binaries..."
@@ -91,10 +91,13 @@ pipeline {
             when {
                 expression { params.action == 'create' }
             }
+            // Set up aws cli to be able to deploy helm charts and other aws related tasks. 
             steps {
                 script {            
                     println "test "
                     sh """
+                        sh "aws eks update-kubeconfig --name ${params.cluster} --region ${params.region}"
+
                         echo test
                     """
                 }
